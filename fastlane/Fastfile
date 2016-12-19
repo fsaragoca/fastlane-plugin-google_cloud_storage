@@ -1,0 +1,35 @@
+lane :test do |options|
+  project = options[:project] || UI.input('Please enter Google Cloud Storage project: ')
+  keyfile = options[:keyfile] || UI.input('Please enter Google Cloud Storage keyfile: ')
+  bucket = options[:bucket] || UI.input('Please enter Google Cloud Storage bucket: ')
+  file_to_upload = options[:upload_path] || UI.input('Please enter path for file to upload: ')
+  file_to_download = options[:download_file_name] || UI.input('Please enter name for file to download: ')
+
+  if file_to_upload
+    google_cloud_storage_upload(
+      project: project,
+      keyfile: keyfile,
+      bucket: bucket,
+      content_path: file_to_upload
+    )
+  end
+
+  if file_to_download
+    exists = google_cloud_storage_check_file(
+      project: project,
+      keyfile: keyfile,
+      bucket: bucket,
+      file_name: file_to_download
+    )
+
+    if exists
+      google_cloud_storage_download(
+        project: project,
+        keyfile: keyfile,
+        bucket: bucket,
+        file_name: file_to_download,
+        output_path: file_to_download
+      )
+    end
+  end
+end
