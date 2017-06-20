@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'google-cloud-storage', '~> 0.23.1'
+  spec.add_dependency 'google-cloud-storage'
 
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'bundler'
